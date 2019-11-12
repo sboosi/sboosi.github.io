@@ -1,5 +1,25 @@
+<!DOCTYPE html>
 <html>
- <body>
-  <h1> Welcome to sboosi GitHub website! </h1>
- </body>
+
+<head>
+  <script data-require="jquery@*" data-semver="2.0.3" src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+</head>
+
+<body>
+  <h1> 
+  Hello 
+  <span id="patient_name">...</span>!
+  </h1>
+
+  <h3>Medications</h3>
+  <ul id="med_list"></ul>
+
+  <h3>Conditions</h3>
+  <ul id="cond_list"></ul>
+
+  <script src="https://cdn.rawgit.com/smart-on-fhir/client-js/v0.1.8/dist/fhir-client.js"></script>
+  <script src="get-data.js"></script>
+</body>
+
 </html>
+
