@@ -4,10 +4,46 @@
     <script src="https://cdn.rawgit.com/smart-on-fhir/client-js/v0.1.8/dist/fhir-client.js"></script>
     <script>
       FHIR.oauth2.authorize({
-        "client_id": "my_web_app",
+        "client_id": "fd354883-d96e-40df-aac0-84d1de368bdc",
         "scope":  "patient/*.read"
       });
     </script>
+    
+<script type="text/javascript">
+		var client_id = "";
+		var url_string = window.location.href;
+		var url = new URL(url_string);
+		var iss = url.searchParams.get("iss");
+		var launch = url.searchParams.get("launch");
+	
+    console.log("iss :" + iss + " launch token:" + launch) ;
+  
+		/* ### Redirect the browser to Epic authorize endpoint to authorize the Client ID ###
+		- response_type = "code"
+		- client_id = client_id (defined above)
+		- redirect_uri = redirect_url (defined in the above form)
+		- launch = the launch token (as passed to your web app's launch URL)
+		- state = <an opaque value used by the client to maintain state between the request and callback.>
+		- scope = "launch" (this is necessary to indicate the app is launching from the EMR context to enable single sign-on)
+		*/
+
+    /*
+      var state = makeid();
+
+		var authorizeEndpoint = "https://apporchard.epic.com/interconnect-ao85prd-oauth/oauth2/authorize";
+		var tokenEndpoint = "https://apporchard.epic.com/interconnect-ao85prd-oauth/oauth2/token";
+
+
+		window.location.replace(authorizeEndpoint
+			+"?response_type=code"
+			+"&client_id="+client_id
+			+"&redirect_uri="+url_string.substring(0, url_string.indexOf("launch.html"))+"redirect.html"
+			+"&launch="+launch
+			+"&state="+state
+			+"&scope=launch");
+    */
+	</script>
+    
   </head>
   <body>Loading...</body>
 </html>
