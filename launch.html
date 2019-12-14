@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
+		  
     <script src="https://cdn.rawgit.com/smart-on-fhir/client-js/v0.1.8/dist/fhir-client.js"></script>
     <script>
+	    /*
       FHIR.oauth2.authorize({
         "client_id": "fd354883-d96e-40df-aac0-84d1de368bdc",
         "scope":  "launch patient/*.read",
 	"redirect_uri": "https://sboosi.github.io/index.html"
       });
+      */
     </script>
     
 <script type="text/javascript">
@@ -28,8 +31,8 @@
 		- scope = "launch" (this is necessary to indicate the app is launching from the EMR context to enable single sign-on)
 		*/
 
-    /*
-      var state = makeid();
+    
+      var state = new Date().getTime() + "";
 
 		var authorizeEndpoint = "https://apporchard.epic.com/interconnect-ao85prd-oauth/oauth2/authorize";
 		var tokenEndpoint = "https://apporchard.epic.com/interconnect-ao85prd-oauth/oauth2/token";
@@ -38,11 +41,11 @@
 		window.location.replace(authorizeEndpoint
 			+"?response_type=code"
 			+"&client_id="+client_id
-			+"&redirect_uri="+url_string.substring(0, url_string.indexOf("launch.html"))+"redirect.html"
+			+"&redirect_uri="+url_string.substring(0, url_string.indexOf("launch.html"))+"index.html"
 			+"&launch="+launch
 			+"&state="+state
 			+"&scope=launch");
-    */
+    
 	</script>
     
   </head>
