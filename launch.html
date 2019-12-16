@@ -3,14 +3,12 @@
   <head>
 		  
     <script src="https://cdn.rawgit.com/smart-on-fhir/client-js/v0.1.8/dist/fhir-client.js"></script>
-    <script>
-	    /*
+    <script>	  
       FHIR.oauth2.authorize({
         "client_id": "fd354883-d96e-40df-aac0-84d1de368bdc",
         "scope":  "launch patient/*.read",
 	"redirect_uri": "https://sboosi.github.io/index.html"
-      });
-      */
+      });      
     </script>
     
 <script type="text/javascript">
@@ -40,6 +38,7 @@
 		var authorizeEndpoint = "https://apporchard.epic.com/interconnect-aocurprd-oauth/oauth2/authorize";		
 		var tokenEndpoint = "https://apporchard.epic.com/interconnect-aocurprd-oauth/oauth2/token" ;
 		//+"&redirect_uri="+url_string.substring(0, url_string.indexOf("launch.html"))+"index.html"
+	/*
 		window.location.replace(authorizeEndpoint
 			+"?response_type=code"
 			+"&client_id="+client_id
@@ -47,7 +46,7 @@
 			+"&launch="+launch
 			+"&state="+state
 			+"&scope=launch");
-    
+    	*/
 	</script>
     
   </head>
