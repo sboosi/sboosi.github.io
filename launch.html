@@ -39,12 +39,11 @@
 	
 		var authorizeEndpoint = "https://apporchard.epic.com/interconnect-aocurprd-oauth/oauth2/authorize";		
 		var tokenEndpoint = "https://apporchard.epic.com/interconnect-aocurprd-oauth/oauth2/token" ;
-
-
+		//+"&redirect_uri="+url_string.substring(0, url_string.indexOf("launch.html"))+"index.html"
 		window.location.replace(authorizeEndpoint
 			+"?response_type=code"
 			+"&client_id="+client_id
-			+"&redirect_uri="+url_string.substring(0, url_string.indexOf("launch.html"))+"index.html"
+			+"&redirect_uri=https://sboosi.github.io/index.html"
 			+"&launch="+launch
 			+"&state="+state
 			+"&scope=launch");
