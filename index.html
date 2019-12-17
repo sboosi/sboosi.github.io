@@ -1,56 +1,46 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <script src="https://cdn.rawgit.com/smart-on-fhir/client-js/v0.1.8/dist/fhir-client.js"></script>
-  </head>
-  <body>
-    <h1>Medications for <span id="name"></span></h1>
-    <ul id="med_list"></ul>
-    <script type="text/javascript">
-        function getPatientName (pt) {
-            if (pt.name) {
-                var names = pt.name.map(function(name) {
-                    return ((name.given)?name.given.join(" "):"") + " " + name.family.join(" ");
-                });
-                return names.join(" / ")
-            } else {
-                return "anonymous";
-            }
-        }
-
-        function getMedicationName (medCodings) {
-            var coding = medCodings.find(function(c){
-                return c.system == "http://www.nlm.nih.gov/research/umls/rxnorm";
-            });
-
-            return coding && coding.display || "Unnamed Medication(TM)"
-        }
-
-        function displayPatient (pt) {
-            document.getElementById('name').innerHTML = getPatientName(pt);
-        }
-
-        var med_list = document.getElementById('med_list');
-
-        function displayMedication (medCodings) {
-            med_list.innerHTML += "<li> " + getMedicationName(medCodings) + "</li>";
-        }                
-
-        FHIR.oauth2.ready(function(smart){
-            smart.patient.read().then(function(pt) {
-                displayPatient (pt);
-            });
-            smart.patient.api.fetchAllWithReferences({type: "MedicationOrder"},["MedicationOrder.medicationReference"]).then(function(results, refs) {
-               results.forEach(function(prescription){
-                    if (prescription.medicationCodeableConcept) {
-                        displayMedication(prescription.medicationCodeableConcept.coding);
-                    } else if (prescription.medicationReference) {
-                        var med = refs(prescription, prescription.medicationReference);
-                        displayMedication(med && med.code.coding || []);
-                    }
-               });
-            });
-        });
-    </script>
-  </body>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Static Template</title>        
+        <script src="https://combinatronics.com/smart-on-fhir/client-js/master/dist/build/fhir-client.js"></script>        
+    </head>
+    <body>
+        <div class="cell top-left">
+            <h4>Current Patient</h4>
+            <pre id="patient"></pre>
+        </div>
+        <div class="cell top-center">
+            <h4>Current User</h4>
+            <pre id="user"></pre>
+        </div>
+        <div class="cell top-right">
+            <h4>Current Encounter</h4>
+            <pre id="encounter"></pre>
+        </div>
+        <div class="cell bottom">
+            <h4>Main Output</h4>
+            <pre id="output">Loading...</pre>
+        </div>
+        <script type="text/javascript">
+          
+        FHIR.oauth2.ready()
+          .then(client => client.request("Patient"))
+          .then(console.log)
+          .catch(console.error);
+       /*   
+            FHIR.oauth2.ready().then(function(client) {
+                console.log("**** App is ready for use *****") ;
+                console.log(client) ;
+              
+                var app = new App(client);
+                App.prototype.setLabel("output", "Conformance Statement");
+                app.renderContext();
+                app.request("metadata");
+            }).catch(createRenderer("output"));
+        */
+        </script>
+    </body>
 </html>
