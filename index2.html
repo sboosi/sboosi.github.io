@@ -4,6 +4,7 @@
     <script src="https://combinatronics.com/smart-on-fhir/client-js/master/dist/build/fhir-client.js"></script>   
   </head>
   <body>
+    <div id="jsonDiv"></div>
     <h1>Medications for <span id="name"></span></h1>
     <ul id="med_list"></ul>
     <script type="text/javascript">
@@ -39,6 +40,7 @@
 
         FHIR.oauth2.ready(function(smart){
             smart.patient.read().then(function(pt) {
+                document.getElementById("jsonDiv").innerHTML = JSON.stringify(pt) ;
                 displayPatient (pt);
             });
             /*
