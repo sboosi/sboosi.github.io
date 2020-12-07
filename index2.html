@@ -40,6 +40,7 @@
             smart.patient.read().then(function(pt) {
                 displayPatient (pt);
             });
+            /*
             smart.patient.api.fetchAllWithReferences({type: "MedicationOrder"},["MedicationOrder.medicationReference"]).then(function(results, refs) {
                results.forEach(function(prescription){
                     if (prescription.medicationCodeableConcept) {
@@ -50,6 +51,7 @@
                     }
                });
             });
+            */
         });
     </script>
   </body>
