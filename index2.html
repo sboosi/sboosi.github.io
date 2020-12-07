@@ -40,7 +40,7 @@
 
         FHIR.oauth2.ready(function(smart){
             smart.patient.read().then(function(pt) {
-                document.getElementById("jsonDiv").value = JSON.stringify(pt) ;
+                document.getElementById("jsonDiv").value = JSON.stringify(pt, null, '\t') ;
                 displayPatient (pt);
             });
             /*
