@@ -10,7 +10,8 @@
         function getPatientName (pt) {
             if (pt.name) {
                 var names = pt.name.map(function(name) {
-                    return ((name.given)?name.given.join(" "):"") + " " + name.family.join(" ");
+                    
+                    return ((name.given)?name.given.join(" "):"") + " " +  (Arrays.isArray(name.family)?name.family.join(" "):name.family) ;
                 });
                 return names.join(" / ")
             } else {
