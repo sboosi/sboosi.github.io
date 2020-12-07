@@ -11,7 +11,7 @@
             if (pt.name) {
                 var names = pt.name.map(function(name) {
                     
-                    return ((name.given)?name.given.join(" "):"") + " " +  (Arrays.isArray(name.family)?name.family.join(" "):name.family) ;
+                    return ((name.given)?name.given.join(" "):"") + " " +  (Array.isArray(name.family)?name.family.join(" "):name.family) ;
                 });
                 return names.join(" / ")
             } else {
