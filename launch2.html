@@ -8,14 +8,7 @@
         <script src="https://combinatronics.com/smart-on-fhir/client-js/master/dist/build/fhir-client.js"></script>
     </head>
     <body>
-        <script>
-          var url = new URL(location.href);
-          if (!url.searchParams.has("launch") || !url.searchParams.has("iss")) {
-            url.searchParams.set("launch", "eyJhIjoiMSIsImciOiIxIn0");
-            url.searchParams.set("iss", "https://launch.smarthealthit.org/v/r3/fhir");
-            document.body.innerHTML = '<a href="' + url.href + '">Click here to simulate EHR launch</a>';
-          }
-          else {
+        <script>          
             FHIR.oauth2.authorize({
 
               // The client_id that you should have obtained after registering a client at
@@ -35,8 +28,7 @@
               // indexes so "." and "./" will not automatically map to the "index.html" file
               // in that directory.
               redirectUri: "index2.html"
-            });
-          }
+            });          
         </script>
     </body>
 </html>
