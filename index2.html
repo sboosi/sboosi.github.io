@@ -7,53 +7,10 @@
     <div id="jsonDiv" style="border-color:black;border-style:inset;padding-left:20px;"></div>    
     
     <script type="text/javascript">
-        function getPatientName (pt) {
-            if (pt.name) {
-                var names = pt.name.map(function(name) {
-                    
-                    return ((name.given)?name.given.join(" "):"") + " " +  (Array.isArray(name.family)?name.family.join(" "):name.family) ;
-                });
-                return names.join(" / ")
-            } else {
-                return "anonymous";
-            }
-        }
-
-        function getMedicationName (medCodings) {
-            var coding = medCodings.find(function(c){
-                return c.system == "http://www.nlm.nih.gov/research/umls/rxnorm";
-            });
-
-            return coding && coding.display || "Unnamed Medication(TM)"
-        }
-
-        function displayPatient (pt) {
-            document.getElementById('name').innerHTML = getPatientName(pt);
-        }
-
-        var med_list = document.getElementById('med_list');
-
-        function displayMedication (medCodings) {
-            med_list.innerHTML += "<li> " + getMedicationName(medCodings) + "</li>";
-        }                
-
         FHIR.oauth2.ready(function(smart){
             smart.patient.read().then(function(pt) {
                 document.getElementById("jsonDiv").innerHTML = "<pre>" + JSON.stringify(pt, null, 2) + "</pre>" ;
-                displayPatient (pt);
             });
-            /*
-            smart.patient.api.fetchAllWithReferences({type: "MedicationOrder"},["MedicationOrder.medicationReference"]).then(function(results, refs) {
-               results.forEach(function(prescription){
-                    if (prescription.medicationCodeableConcept) {
-                        displayMedication(prescription.medicationCodeableConcept.coding);
-                    } else if (prescription.medicationReference) {
-                        var med = refs(prescription, prescription.medicationReference);
-                        displayMedication(med && med.code.coding || []);
-                    }
-               });
-            });
-            */
         });
     </script>
   </body>
