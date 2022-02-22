@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <script src="https://cdn.jsdelivr.net/npm/fhirclient/build/fhir-client.js"></script>  
+  </head>
+  <body>
+    <div id="jsonDiv" style="border-color:black;border-style:inset;padding-left:20px;"></div>    
+    
+    <script type="text/javascript">
+        FHIR.oauth2.ready(function(smart){
+            smart.patient.read().then(function(pt) {
+                document.getElementById("jsonDiv").innerHTML = "<pre>" + JSON.stringify(pt, null, 2) + "</pre>" ;
+            });
+        });
+    </script>
+  </body>
+</html>
