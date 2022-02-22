@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Static Template</title>
+        <script src="https://cdn.jsdelivr.net/npm/fhirclient/build/fhir-client.js"></script>
+    </head>
+    <body>
+        <script>          
+            FHIR.oauth2.authorize({
+
+              // The client_id that you should have obtained after registering a client at
+              // the EHR.
+              clientId: "48a5f292-e8c3-4f93-b52e-b781d3885e9c",
+
+              // The scopes that you request from the EHR
+              scope: [
+                "launch",           // Get the launch context in EHR launch mode
+                "openid fhirUser",  // Get the current user
+                "patient/*.read",   // Read patient data
+              ].join(" "),
+              
+              redirectUri: "patient.html"
+            });          
+        </script>
+    </body>
+</html>
