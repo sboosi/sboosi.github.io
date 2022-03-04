@@ -917,17 +917,28 @@ function drawRotated(img,degree) {
       else
         $ratioBox.attr('title', decodeURI(name));
 
+      $ratioBox.find(".status_processing").show() ;
+      setTimeout(function() { 
+        $ratioBox.find(".status_processing").hide() ; 
+        if (name == "timeframe.png")
+          $ratioBox.find(".status_bad").show() ; 
+        else
+          $ratioBox.find(".status_good").show() ; 
+      }, 2000) ;
+      
       //if is main image
+      /*
       if (main) {
 
         var $tag = $ratioBox.find('.main-tag');
         $tag.show();
 
       }
+      */
 
       console.log("In imagesloader $btnModify") ;
       console.log($btnModify) ;
-      
+
       $btnModify.fadeIn(options.fadeTime);
 
       //button modify popover
@@ -944,7 +955,10 @@ function drawRotated(img,degree) {
 
           var id = $btnModify.closest('[data-type="image"]').attr('data-id');
           var idx = self.AttachmentArray.map(function (file) { return file.FileName; }).indexOf(id);
-
+          
+          console.log("In RenderThumbnail popover method ") ;
+          console.log(self.AttachmentArray) ;
+          
           // If is the main image hide left button and main button 
           if (idx == 0) {
 

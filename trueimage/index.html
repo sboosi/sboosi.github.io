@@ -89,7 +89,9 @@
                       <span class="fa fa-2x fa-spin fa-spinner"></span>
                     </div>
                     <img data-type="preview" class="btn btn-light ratio-img img-fluid p-2 image border dashed rounded" src="" style="display: none; cursor: default;">
-                    <span class="label top-right fa fa-spin fa-spinner status_tag" style="display:none"></span>
+                    <span class="label top-right fa fa-spin fa-spinner status_processing" style="display:none;"></span>
+                    <span class="label top-right fa fa-light fa-circle-check status_good" style="display:none;color:green;background-color: white;"></span>
+                    <span class="label top-right fa fa-light fa-circle-xmark status_bad" style="display:none;color:red;background-color: white;"></span>
                     <!--<span class="fa fa-2x fa-spin fa-spinner label top-right badge">Processing</span>-->
                     <!--<span class="badge badge-pill badge-success p-2 w-50 main-tag" style="display:none;">Main</span>-->
                     
@@ -144,11 +146,27 @@
           </div>
         </div>
         
+        <div class="card shadow-lg rounded-xlg mt-3">
+          <div class="card-body">
+              <div class="card-text">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type a message to your care team"></textarea>
+              </div>                
+          </div>
+        </div>
+
+        <!--
+        <div class="row mt-2">
+          <div class="col mr-2 ml-2">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type a message to your care team"></textarea>
+          </div>
+        </div>
+      -->
+
         <!-- Upload Button -->
         <div class="row mt-2">
           <div class="col-md-4 offset-md-8 text-center mb-4">
-            <button id="btnContinue" type="submit" form="frm" class="btn btn-block btn-outline-success float-right" data-toggle="tooltip" data-trigger="manual" data-placement="top" data-title="Continue">
-              Continue<span id="btnContinueIcon" class="fa fa-chevron-circle-right ml-2"></span><span id="btnContinueLoading" class="fa fa-spin fa-spinner ml-2" style="display:none"></span>
+            <button id="btnContinue" type="submit" form="frm" class="btn btn-block btn-outline-primary float-right" data-toggle="tooltip" data-trigger="manual" data-placement="top" data-title="Continue">
+              Send<span id="btnContinueIcon" class="fa fa-chevron-circle-right ml-2"></span><span id="btnContinueLoading" class="fa fa-spin fa-spinner ml-2" style="display:none"></span>
             </button>
           </div>
         </div>
