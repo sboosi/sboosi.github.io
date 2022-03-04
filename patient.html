@@ -10,7 +10,7 @@
         FHIR.oauth2.ready(function(smart){
             console.log("Smart Login Successful") ;
             console.log(smart) ;
-            console.log("access token:" + smart.tokenResponse.access_token) ;
+            console.log("access token:" + smart.state.tokenResponse.access_token) ;
             smart.patient.read().then(function(pt) {
                 document.getElementById("patientDiv").innerHTML = "<pre>" + JSON.stringify(pt, null, 2) + "</pre>" ;
             });
