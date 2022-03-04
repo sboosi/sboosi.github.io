@@ -10,11 +10,16 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- Using https://www.jqueryscript.net/form/multi-image-uploader-bootstrap.html as base for upload-->
+
     <link rel="stylesheet" href="jquery.imagesloader.css" />
 
     <title>TrueImage - Skin Photo Verifier</title>
 
     <style>
+        html {
+            font-size: 14px;
+        }       
         .rounded-xlg {
             border-radius: 1rem!important;
         }      
@@ -29,7 +34,11 @@
             position: absolute;
             right: 10px;
             top: 2px;
-        }             
+        }   
+        .status-bad-mesg {
+          font-size:x-small ;
+          color: red;          
+        }
     </style>
 
   </head>
@@ -91,7 +100,11 @@
                     <img data-type="preview" class="btn btn-light ratio-img img-fluid p-2 image border dashed rounded" src="" style="display: none; cursor: default;">
                     <span class="label top-right fa fa-spin fa-spinner status_processing" style="display:none;"></span>
                     <span class="label top-right fa fa-light fa-circle-check status_good" style="display:none;color:green;background-color: white;"></span>
-                    <span class="label top-right fa fa-light fa-circle-xmark status_bad" style="display:none;color:red;background-color: white;"></span>
+                    <div class="label top-right status_bad" style="display:none;">
+                      <span class="status-bad-mesg">Blur/Dim</span>
+                      <span class="fa fa-light fa-circle-xmark" style="color:red;background-color: white;"></span>
+                    </div>
+
                     <!--<span class="fa fa-2x fa-spin fa-spinner label top-right badge">Processing</span>-->
                     <!--<span class="badge badge-pill badge-success p-2 w-50 main-tag" style="display:none;">Main</span>-->
                     
@@ -149,9 +162,22 @@
         <div class="card shadow-lg rounded-xlg mt-3">
           <div class="card-body">
               <div class="card-text">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type a message to your care team"></textarea>
-              </div>                
-          </div>
+                <div class="row">
+                  <div class="col">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type a message to your care team"></textarea>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <select class="form-select form-select-sm w-100" aria-label=".form-select-sm example">
+                      <option selected>Select your provider</option>
+                      <option value="1">Dr. Ron Li</option>
+                      <option value="2">Dr. John Doe</option>                  
+                    </select>   
+                  </div>             
+                </div>
+              </div>              
+          </div>          
         </div>
 
         <!--
@@ -166,7 +192,7 @@
         <div class="row mt-2">
           <div class="col-md-4 offset-md-8 text-center mb-4">
             <button id="btnContinue" type="submit" form="frm" class="btn btn-block btn-outline-primary float-right" data-toggle="tooltip" data-trigger="manual" data-placement="top" data-title="Continue">
-              Send<span id="btnContinueIcon" class="fa fa-chevron-circle-right ml-2"></span><span id="btnContinueLoading" class="fa fa-spin fa-spinner ml-2" style="display:none"></span>
+              Send Message<span id="btnContinueIcon" class="fa fa-chevron-circle-right ml-2" style="display: none;"></span><span id="btnContinueLoading" class="fa fa-spin fa-spinner ml-2" style="display:none"></span>
             </button>
           </div>
         </div>
@@ -189,6 +215,10 @@
           ]
         */        
         var imagesloader = $('[data-type=imagesloader]').imagesloader({
+          
+          maxfiles: 10,
+          // allowed file types
+	        filesType: ["image/jpeg", "image/png", "image/gif", "image/svg"],
 
         });
 

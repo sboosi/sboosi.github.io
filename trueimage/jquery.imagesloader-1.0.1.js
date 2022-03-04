@@ -919,8 +919,9 @@ function drawRotated(img,degree) {
 
       $ratioBox.find(".status_processing").show() ;
       setTimeout(function() { 
-        $ratioBox.find(".status_processing").hide() ; 
-        if (name == "timeframe.png")
+        $ratioBox.find(".status_processing").hide() ;
+        var idx = self.AttachmentArray.map(function (file) { return file.FileName; }).indexOf(name);
+        if (idx == 2)
           $ratioBox.find(".status_bad").show() ; 
         else
           $ratioBox.find(".status_good").show() ; 
@@ -965,9 +966,9 @@ function drawRotated(img,degree) {
             $(popoverContent).find('[data-operation="left"]').addClass('disabled');
             $(popoverContent).find('[data-operation="left"]').css('cursor', 'default');
             $(popoverContent).find('[data-operation="left"]').removeAttr('data-operation');
-            $(popoverContent).find('[data-operation="main"]').addClass('disabled');
-            $(popoverContent).find('[data-operation="main"]').css('cursor', 'default');
-            $(popoverContent).find('[data-operation="main"]').removeAttr('data-operation');
+            //$(popoverContent).find('[data-operation="main"]').addClass('disabled');
+            //$(popoverContent).find('[data-operation="main"]').css('cursor', 'default');
+            //$(popoverContent).find('[data-operation="main"]').removeAttr('data-operation');
           }
 
           // Hide right button if there is no other image in the right
