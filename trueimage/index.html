@@ -58,10 +58,12 @@
             -->
         </div>
 
-        <div class="card text-center mt-2">
+        <div class="card text-center shadow-lg rounded-xlg mt-2">
+          <!--
           <div class="card-header text-primary">
             Select/Take Photos
           </div>
+          -->
           <div class="card-body">
             <form id="frm" method="post" class="needs-validation" novalidate>
               <!--Image container -->
@@ -161,13 +163,15 @@
 
     <script>
       $(document).ready(function () {
-        var imagesloader = $('[data-type=imagesloader]').imagesloader({
+        /*
           imagesToLoad: [
             {"Url":"biscut.jpg","Name":"Biscuit"},
             {"Url":"raju.jpg","Name":"Raju"},
             {"Url":"cico_eb.jpg","Name":"Cico & Zeb"},
-            // more images here
           ]
+        */        
+        var imagesloader = $('[data-type=imagesloader]').imagesloader({
+
         });
 
         //Form
