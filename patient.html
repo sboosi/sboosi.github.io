@@ -4,14 +4,18 @@
      <script src="https://cdn.jsdelivr.net/npm/fhirclient/build/fhir-client.js"></script>  
   </head>
   <body>
-    <div id="jsonDiv" style="border-color:black;border-style:inset;padding-left:20px;"></div>    
-    
+    <div id="patientDiv" style="border-color:black;border-style:inset;padding-left:20px;"></div>    
+    <div id="userDiv" style="border-color:black;border-style:inset;padding-left:20px;"></div>    
     <script type="text/javascript">
         FHIR.oauth2.ready(function(smart){
             console.log("Smart Login Successful") ;
             console.log(smart) ;
+            console.log("access token:" + smart.tokenResponse.access_token) ;
             smart.patient.read().then(function(pt) {
-                document.getElementById("jsonDiv").innerHTML = "<pre>" + JSON.stringify(pt, null, 2) + "</pre>" ;
+                document.getElementById("patientDiv").innerHTML = "<pre>" + JSON.stringify(pt, null, 2) + "</pre>" ;
+            });
+            smart.user.read().then(function(pt) {
+                document.getElementById("userDiv").innerHTML = "<pre>" + JSON.stringify(pt, null, 2) + "</pre>" ;
             });
         });
     </script>
