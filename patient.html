@@ -8,6 +8,8 @@
     
     <script type="text/javascript">
         FHIR.oauth2.ready(function(smart){
+            console.log("Smart Login Successful") ;
+            console.log(smart) ;
             smart.patient.read().then(function(pt) {
                 document.getElementById("jsonDiv").innerHTML = "<pre>" + JSON.stringify(pt, null, 2) + "</pre>" ;
             });
