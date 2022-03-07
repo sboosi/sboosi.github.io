@@ -918,6 +918,7 @@
            $ratioBox.attr('title', decodeURI(name));
    
          $ratioBox.find(".status_processing").show() ;
+         
          setTimeout(function() { 
            $ratioBox.find(".status_processing").hide() ; 
            var idx = self.AttachmentArray.map(function (file) { return file.FileName; }).indexOf(name);
