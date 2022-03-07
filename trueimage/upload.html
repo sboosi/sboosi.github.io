@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Using https://www.jqueryscript.net/form/multi-image-uploader-bootstrap.html as base for upload-->
+
+    <link rel="stylesheet" href="jquery.imagesloader.css" />
+
+    <title>TrueImage - Skin Photo Verifier</title>
+
+    <style>
+        /*
+        html {
+            font-size: 14px;
+        } 
+        */
+        /* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+        @media screen and (min-width: 401px) {
+          html {
+            font-size: 1rem;
+          }
+        }
+
+        /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+        @media screen and (max-width: 400px) {
+          html {
+            font-size: 0.8rem;
+          }
+        }
+
+        .rounded-xlg {
+            border-radius: 1rem!important;
+        }      
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px; /* Set the fixed height of the footer here */
+            line-height: 60px; /* Vertically center the text there */            
+        }     
+        .label.top-right {
+            position: absolute;
+            right: 10px;
+            top: 2px;
+        }   
+        .status-bad-mesg {
+          font-size:x-small ;
+          color: red;    
+          background-color: white;      
+        }
+    </style>
+
+  </head>
+  <body>
+    <div class="container-fluid">
+        <div class="row mt-2">
+          <div class="col col-md-3">
+            <img src="smlogo.svg" rounded style="width:90%" title="TrueImage"></img>        
+          </div>
+          <div class="col col-md-8 text-right">
+            <img src="trueimage.png" rounded style="width:90%" title="TrueImage"></img>        
+          </div>
+        </div>        
+
+        <div class="card text-center shadow-lg rounded-xlg mt-2">          
+          <div class="card-header text-primary">
+            Select/Take Photos
+          </div>          
+          <div class="card-body">
+            <form id="frm" method="post" class="needs-validation" novalidate>
+              <!--Image container -->
+              <div class="row"
+                data-type="imagesloader"
+                data-errorformat="Accepted file formats"
+                data-errorsize="Maximum size accepted"
+                data-errorduplicate="File already loaded"
+                data-errormaxfiles="Maximum number of images you can upload"
+                data-errorminfiles="Minimum number of images to upload"
+                data-modifyimagetext="Modify immage">
+                <!-- Progress bar -->
+                <div class="col-12 order-1 mt-2">
+                  <div data-type="progress" class="progress" style="height: 25px; display:none;">
+                    <div data-type="progressBar" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 100%;">Load in progress...</div>
+                  </div>
+                </div>
+                <!-- Model -->
+                <div data-type="image-model" class="col-4 pl-2 pr-2 pt-2" style="max-width:200px; display:none;">
+                  <div class="ratio-box text-center" data-type="image-ratio-box">
+                    <img data-type="noimage" class="btn btn-light ratio-img img-fluid p-2 image border dashed rounded" src="photo-camera-gray.svg" style="cursor:pointer;">
+                    <div data-type="loading" class="img-loading" style="color:#218838; display:none;">
+                      <span class="fa fa-2x fa-spin fa-spinner"></span>
+                    </div>
+                    <img data-type="preview" class="btn btn-light ratio-img img-fluid p-2 image border dashed rounded" src="" style="display: none; cursor: default;">
+                    <span class="label top-right fa fa-spin fa-spinner status_processing" style="display:none;"></span>
+                    <span class="label top-right fa fa-light fa-circle-check status_good" style="display:none;color:green;background-color: white;"></span>
+                    <div class="label top-right status_bad" style="display:none;">
+                      <span class="status-bad-mesg">Blur/Dim</span>
+                      <span class="fa fa-light fa-circle-xmark" style="color:red;background-color: white;"></span>
+                    </div>
+                  </div>
+                  <!-- Buttons -->
+                  <div data-type="image-buttons" class="row justify-content-center mt-2">
+                    <div class="col text-center">
+                      <button data-type="add" class="btn btn-outline-primary btn-sm" type="button"><span class="fa fa-camera mr-2"></span>Add</button>
+                      <div data-type="btn-modify" style="display: none;">
+                        <div class="row">
+                          <div class="col-9 offset-1 bg-info text-center" style="font-size: small; color: red;">
+                            Blur/Dim <span class="fas fa-circle-question"></span>
+                          </div>
+                          <!--
+                          <div class="col-2 bg-warning text-center" style="font-size: small; color: red;">
+                            <span class="fas fa-circle-question"></span>
+                          </div>
+                          -->
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <button data-operation="rotateanticlockwise" class="btn btn-primary btn-sm rounded-pill" type="button"><span class="fas fa-rotate-left"></span></button>
+                            <button data-operation="rotateclockwise" class="btn btn-primary btn-sm rounded-pill" type="button"><span class="fas fa-rotate-right"></span></button><!-- fa-redo-alt -->
+                            <button data-operation="remove" class="btn btn-danger btn-sm rounded-pill" type="button"><span class="fas fa-trash-can"></span></button>
+                          </div>
+                        </div>
+                      </div>
+                      <!--
+                      <button data-type="btn-modify" type="button" class="btn btn-outline-primary btn-sm m-0" data-toggle="popover" data-placement="right" style="display:none;">
+                        <span class="fa fa-pencil-alt mr-2"></span>Modify
+                      </button>
+                      -->
+                    </div>
+                  </div>
+                </div>
+                <!-- Popover operations -->
+                <div data-type="popover-model" style="display:none">
+                  <div data-type="popover" class="ml-3 mr-3" style="min-width:150px;">
+                    <!--
+                    <div class="row">
+                      <div class="col p-0">
+                        <button data-operation="main" class="btn btn-block btn-success btn-sm rounded-pill" type="button"><span class="fa fa-angle-double-up mr-2"></span>Main</button>
+                      </div>
+                    </div>                
+                    <div class="row mt-2">
+                      <div class="col-6 p-0 pr-1">
+                        <button data-operation="left" class="btn btn-block btn-outline-success btn-sm rounded-pill" type="button"><span class="fa fa-angle-left mr-2"></span>Left</button>
+                      </div>
+                      <div class="col-6 p-0 pl-1">
+                        <button data-operation="right" class="btn btn-block btn-outline-success btn-sm rounded-pill" type="button">Right<span class="fa fa-angle-right ml-2"></span></button>
+                      </div>
+                    </div>
+                    -->
+                    <div class="row mt-2">
+                      <div class="col-6 p-0 pr-1">
+                        <button data-operation="rotateanticlockwise" class="btn btn-block btn-outline-primary btn-sm rounded-pill" type="button"><span class="fas fa-undo-alt mr-2"></span>Rotate</button>
+                      </div>
+                      <div class="col-6 p-0 pl-1">
+                        <button data-operation="rotateclockwise" class="btn btn-block btn-outline-primary btn-sm rounded-pill" type="button">Rotate<span class="fas fa-redo-alt ml-2"></span></button>
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <button data-operation="remove" class="btn btn-outline-danger btn-sm btn-block" type="button"><span class="fa fa-times mr-2"></span>Remove</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="input-group">
+                  <!--Hidden file input for images-->
+                  <input id="files" type="file" name="files[]" data-button="" multiple="" accept="image/jpeg, image/png, image/gif," style="display:none;">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        <div class="card shadow-lg rounded-xlg mt-3">
+          <div class="card-body">
+              <div class="card-text">
+                <div class="row">
+                  <div class="col">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type a message to your care team"></textarea>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <select class="form-select form-select-sm w-100" aria-label=".form-select-sm example">
+                      <option selected>Select your provider</option>
+                      <option value="1">Dr. Ron Li</option>
+                      <option value="2">Dr. John Doe</option>                  
+                    </select>   
+                  </div>             
+                </div>
+              </div>              
+          </div>          
+        </div>
+
+        <!--
+        <div class="row mt-2">
+          <div class="col mr-2 ml-2">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type a message to your care team"></textarea>
+          </div>
+        </div>
+      -->
+
+        <!-- Upload Button -->
+        <div class="row mt-2">
+          <div class="col-md-4 offset-md-8 text-center mb-4">
+            <button id="btnContinue" type="submit" form="frm" class="btn btn-block btn-outline-primary float-right" data-toggle="tooltip" data-trigger="manual" data-placement="top" data-title="Continue">
+              Send Message<span id="btnContinueIcon" class="fa fa-chevron-circle-right ml-2" style="display: none;"></span><span id="btnContinueLoading" class="fa fa-spin fa-spinner ml-2" style="display:none"></span>
+            </button>
+          </div>
+        </div>
+
+    </div>
+
+    <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    <script src="jquery.imagesloader-1.0.1.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        /*
+          imagesToLoad: [
+            {"Url":"biscut.jpg","Name":"Biscuit"},
+            {"Url":"raju.jpg","Name":"Raju"},
+            {"Url":"cico_eb.jpg","Name":"Cico & Zeb"},
+          ]
+        */        
+        var imagesloader = $('[data-type=imagesloader]').imagesloader({
+          
+          maxfiles: 10,
+          // allowed file types
+	        filesType: ["image/jpeg", "image/png", "image/gif", "image/svg"],
+
+        });
+
+        //Form
+        $frm = $('#frm');
+        // Form submit
+        $frm.submit(function (e) {
+          var $form = $(this);
+          var files = imagesloader.data('format.imagesloader').AttachmentArray;
+          var il = imagesloader.data('format.imagesloader');
+          if (il.CheckValidity())
+            alert('Upload ' + files.length + ' files');        
+          e.preventDefault();
+          e.stopPropagation();
+        });
+      });      
+    </script>
+  </body>
+</html>
