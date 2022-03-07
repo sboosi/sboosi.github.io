@@ -920,10 +920,11 @@
          $ratioBox.find(".status_processing").show() ;
          setTimeout(function() { 
            $ratioBox.find(".status_processing").hide() ; 
-           if (name == "timeframe.png")
-             $ratioBox.find(".status_bad").show() ; 
+           var idx = self.AttachmentArray.map(function (file) { return file.FileName; }).indexOf(name);
+           if (idx == 3)           
+             $div.find(".status_bad").show() ;  //ratioBox
            else
-             $ratioBox.find(".status_good").show() ; 
+             $div.find(".status_good").show() ; 
          }, 2000) ;
          
          //if is main image

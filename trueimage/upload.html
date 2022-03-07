@@ -24,15 +24,15 @@
         */
         /* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
         @media screen and (min-width: 401px) {
-          html {
-            font-size: 1rem;
+          body {
+            font-size: 16px;
           }
         }
 
         /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
         @media screen and (max-width: 400px) {
-          html {
-            font-size: 0.8rem;
+          body {
+            font-size: 14px;
           }
         }
 
@@ -112,7 +112,7 @@
                       <button data-type="add" class="btn btn-outline-primary btn-sm" type="button"><span class="fa fa-camera mr-2"></span>Add</button>
                       <div data-type="btn-modify" style="display: none;">
                         <div class="row">
-                          <div class="col-9 offset-1 bg-warning text-center" style="font-size: small; color: red;">
+                          <div class="col-9 offset-1 bg-warning text-center status_bad" style="font-size: small; color: red;display: none;">
                             Blur/Dim <span class="fas fa-circle-question"></span>
                           </div>
                           <!--
@@ -182,12 +182,7 @@
         <div class="card shadow-lg rounded-xlg mt-3">
           <div class="card-body">
               <div class="card-text">
-                <div class="row">
-                  <div class="col">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type a message to your care team"></textarea>
-                  </div>
-                </div>
-                <div class="row mt-3">
+                <div class="row mt-1">
                   <div class="col">
                     <select class="form-select form-select-sm w-100" aria-label=".form-select-sm example">
                       <option selected>Select your provider</option>
@@ -195,6 +190,11 @@
                       <option value="2">Dr. John Doe</option>                  
                     </select>   
                   </div>             
+                </div>                
+                <div class="row mt-3">
+                  <div class="col">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type a message to your care team"></textarea>
+                  </div>
                 </div>
               </div>              
           </div>          
@@ -211,7 +211,7 @@
         <!-- Upload Button -->
         <div class="row mt-2">
           <div class="col-md-4 offset-md-8 text-center mb-4">
-            <button id="btnContinue" type="submit" form="frm" class="btn btn-block btn-outline-primary float-right" data-toggle="tooltip" data-trigger="manual" data-placement="top" data-title="Continue">
+            <button id="btnContinue" type="submit" form="frm" class="btn btn-block btn-primary float-right" data-toggle="tooltip" data-trigger="manual" data-placement="top" data-title="Continue">
               Send Message<span id="btnContinueIcon" class="fa fa-chevron-circle-right ml-2" style="display: none;"></span><span id="btnContinueLoading" class="fa fa-spin fa-spinner ml-2" style="display:none"></span>
             </button>
           </div>
