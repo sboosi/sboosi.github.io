@@ -872,6 +872,7 @@
                , Base64: base64
                , FileSizeInBytes: base64.length
                , File: null
+               , Quality: 'good'
              });
    
              self.RenderThumbnail(url, name, main, true);
@@ -924,9 +925,11 @@
          setTimeout(function() { 
            $div.find(".status_processing").hide() ; // ratioBox
            var idx = self.AttachmentArray.map(function (file) { return file.FileName; }).indexOf(name);
-           if (idx == 1)           
+           if (idx == 1) {
              $div.find(".status_bad").show() ;  //ratioBox
-           else
+             self.AttachmentArray[idx].Quality = "bad" ;
+             $(".suggestions").show() ;
+           } else
              $div.find(".status_good").show() ; 
          }, 2000) ;
          

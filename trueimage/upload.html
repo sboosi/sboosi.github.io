@@ -56,6 +56,16 @@
           color: red;    
           background-color: white;      
         }
+
+        .modal-dialog {
+          height: 100vh !important;
+          display: flex;
+        }
+
+        .modal-content {
+          margin: auto !important;
+          height: fit-content !important;
+        }        
     </style>
 
   </head>
@@ -158,6 +168,18 @@
                 </div>
               </div>
             </form>
+            <div class="row suggestions text-left mt-2" style="display: none;">
+              <div class="col">
+                One or more of the photos you took are too fuzzy or dim for us to use.
+                Suggestions:
+                <ol>
+                  <li>Move to a place with brighter light</li>
+                  <li>Clean your camera lens</li>
+                  <li>Move your camera closer for greater detail</li>
+                  <li>Move your camera further away to get a sharper picture</li>
+                </ol>
+              </div>
+            </div>
           </div>
         </div>
         
@@ -193,13 +215,33 @@
         <!-- Upload Button -->
         <div class="row mt-2">
           <div class="col-md-4 offset-md-8 text-center mb-4">
-            <a href="uploaded.html" class="btn btn-block btn-sm btn-primary float-right"><span class="fa fa-envelope mr-2"></span>Send Message</a>
+            <a href="uploaded.html" class="btn btn-block btn-sm btn-primary float-right send-message"><span class="fa fa-envelope mr-2"></span>Send Message</a>
             <!--
             <button id="btnContinue" type="submit" form="frm" 
               class="btn btn-block btn-primary float-right" data-toggle="tooltip" data-trigger="manual" data-placement="top" data-title="Continue">
               Send Message<span id="btnContinueIcon" class="fa fa-chevron-circle-right ml-2" style="display: none;"></span><span id="btnContinueLoading" class="fa fa-spin fa-spinner ml-2" style="display:none"></span>
             </button>
             -->
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade modal-sm" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header text-left">
+                <h4 class="modal-title">Fuzzy Images</h4>
+              </div>              
+              <div class="modal-body">
+                <p>You are sending images that are too fuzzy or dim for your doctor to use. Are you sure you want to proceed?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-primary" data-dismiss="modal" onclick="window.location='uploaded.html'">Yes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -227,6 +269,26 @@
 	        filesType: ["image/jpeg", "image/png", "image/gif", "image/svg"],
 
         });
+
+        $(".send-message").on('click', function(evt) {
+          var files = imagesloader.data('format.imagesloader').AttachmentArray ;          
+          var il = imagesloader.data('format.imagesloader');
+          
+          if (!il.CheckValidity()) return false ;
+
+          var badFileFound = false ;
+          files.forEach(file => {
+            if (file.Quality == "bad")
+              badFileFound = true ;
+          });
+          if (badFileFound) {
+            $("#myModal").modal() ;
+            return false;
+          }
+          console.log("image files ") ;
+          console.log(files) ;
+          return true ;
+        }) ;
 
         //Form
         $frm = $('#frm');
