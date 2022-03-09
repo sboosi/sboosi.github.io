@@ -43,20 +43,20 @@
               TrueImage - Skin Photo Verifier
             </div>
             <div class="card-body">
-                <div class="card-text">
-                    <h5>Welcome <span id="patientNameDiv"></span>! </h5>
-                    <p class="mt-4">Upload or take photos, and True Image will tell you whether it is good enough for your doctor to use. 
-                    True Image then sends the good photos directly to your doctor. 
-                    </p>
-                    <p>                                       
-                      Some more text or pictures will help this page
-                    </p>                      
+                <div class="card-text h5 text-center">
+                    
+                    <p>Thank you for using True Image to send us your photos.</p>                    
+
+                    <p>Your message has been sent to Dr. Daneshjou.</p>
+                      
+                    <p>You can view your message and follow up using MyHealth. </p>
+
                 </div>                
             </div>
             <div class="card-footer">
               <div class="row mt-2">
                 <div class="col text-center">
-                  <a href="upload.html" class="btn btn-block float-right btn-sm btn-primary"><span class="fa fa-camera mr-2"></span>Select/Take Photos</a>
+                  <a href="index.html" class="btn btn-sm btn-primary">Close</a>
                 </div>
               </div>                              
             </div>
@@ -74,61 +74,7 @@
     <script>
       $(document).ready(function () {
 
-      });      
-      
-      FHIR.oauth2.ready(function(smart){
-          console.log("Smart Login Successful") ;
-          console.log(smart) ;
-          console.log("access token:" + smart.state.tokenResponse.access_token) ;
-
-          smart.patient.read().then(function(patient) {
-              document.getElementById("patientNameDiv").innerHTML = patient.name[0].text ;
-              //document.getElementById("patientDiv").innerHTML = "<pre>" + JSON.stringify(pt, null, 2) + "</pre>" ;
-          }); 
-          
-          
-          var wsUrl = "https://epic-ic-foreground-test.stanfordmed.org/Interconnect-FHIR-POC" ;
-          
-          var msgxml = `
-            <SendMessage xmlns="urn:epicsystems-com:PatientAccessMobile.2013.Services">
-              <PatientID>Z5090</PatientID>
-              <PatientIDType>External</PatientIDType>
-              <MyChartAccountID>8028</MyChartAccountID>
-              <MyChartAccountIDType>External</MyChartAccountIDType>
-              <Message>
-                <Body>Please follow up at your earliest convenience.</Body>
-                <MessageType>11</MessageType>
-                <ParentMessageID></ParentMessageID>
-                <Subject>Check-in Needed (sub)</Subject>
-                <SubjectID></SubjectID>
-                <To>5403</To>
-                <Viewers>
-                  <string>8028</string>
-                  <string>8029</string>
-                </Viewers>
-              </Message>
-            </SendMessage>
-          ` ;
-
-          $.ajax({
-            type: "POST",
-            url: "https://epic-ic-foreground-test.stanfordmed.org/Interconnect-FHIR-POC",
-            dataType: "xml",
-            headers: {
-              'Authorization': 'Bearer ' + smart.state.tokenResponse.access_token
-            },
-            contentType: "application/xml",
-            data: msgxml,
-            success: function (res) {
-                alert("XML: it works!");
-            },
-            error: function (res) {
-                alert("XML: not working! " + res.statusText);
-            }
-          });          
-
-      });
-          
+      });       
     </script>
   </body>
 </html>

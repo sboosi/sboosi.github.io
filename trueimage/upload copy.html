@@ -17,25 +17,9 @@
     <title>TrueImage - Skin Photo Verifier</title>
 
     <style>
-        
         html {
             font-size: 14px;
-        } 
-        
-        /* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
-        @media screen and (min-width: 401px) {
-          body {
-            font-size: 14px;
-          }
-        }
-
-        /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
-        @media screen and (max-width: 400px) {
-          body {
-            font-size: 14px;
-          }
-        }
-
+        }       
         .rounded-xlg {
             border-radius: 1rem!important;
         }      
@@ -48,8 +32,8 @@
         }     
         .label.top-right {
             position: absolute;
-            right: 1px;
-            top: 1px;
+            right: 10px;
+            top: 2px;
         }   
         .status-bad-mesg {
           font-size:x-small ;
@@ -59,21 +43,37 @@
     </style>
 
   </head>
-  <body>
+  <body>      
     <div class="container-fluid">
-        <div class="row mt-2">
-          <div class="col col-md-3">
-            <img src="smlogo.svg" rounded style="width:90%" title="TrueImage"></img>        
+        <div class="row mt-1">
+          <div class="col">
+            <img src="smlogo.svg" rounded style="width:90%;" title="TrueImage"></img>        
           </div>
-          <div class="col col-md-8 text-right">
-            <img src="trueimage.png" rounded style="width:90%" title="TrueImage"></img>        
+          <div class="col">
+            <img src="trueimage.png" rounded style="width:90%;" title="TrueImage"></img>        
           </div>
         </div>        
+        <div class="card shadow-lg rounded-xlg mt-3">
+            <div class="card-body">
+                <div class="card-text">
+                    Upload or take photos, and True Image will tell you whether it is good enough for your doctor to use. 
+                    True Image then sends the good photos directly to your doctor.                    
+                </div>                
+            </div>
+            <!--
+            <div class="card-footer text-center">
+                <button type="button" class="btn btn-primary">Select/Take Photos</button>
+                <button type="button" class="btn btn-primary">Send</button>
+            </div>
+            -->
+        </div>
 
-        <div class="card text-center shadow-lg rounded-xlg mt-4">          
+        <div class="card text-center shadow-lg rounded-xlg mt-2">
+          <!--
           <div class="card-header text-primary">
             Select/Take Photos
-          </div>          
+          </div>
+          -->
           <div class="card-body">
             <form id="frm" method="post" class="needs-validation" novalidate>
               <!--Image container -->
@@ -98,57 +98,56 @@
                     <div data-type="loading" class="img-loading" style="color:#218838; display:none;">
                       <span class="fa fa-2x fa-spin fa-spinner"></span>
                     </div>
-                    <img data-type="preview" class="btn btn-light ratio-img img-fluid p-2 image border dashed rounded" src="" style="display: none; cursor: default;">                    
-                    <!--<span class="label top-right fa fa-spin fa-spinner status_processing" style="display:none;"></span>-->
-                    <button data-type="remove" data-operation="remove" class="label top-right btn btn-warning btn-sm rounded-pill" type="button" style="display: none;"><span class="fas fa-trash-can"></span></button>
-                    <!--
-                    <span data-type="remove" data-operation="remove" class="label top-right fas fa-trash-can rounded-pill" style="display:none;"></span>
-                    -->
-                    <!--
+                    <img data-type="preview" class="btn btn-light ratio-img img-fluid p-2 image border dashed rounded" src="" style="display: none; cursor: default;">
+                    <span class="label top-right fa fa-spin fa-spinner status_processing" style="display:none;"></span>
                     <span class="label top-right fa fa-light fa-circle-check status_good" style="display:none;color:green;background-color: white;"></span>
                     <div class="label top-right status_bad" style="display:none;">
                       <span class="status-bad-mesg">Blur/Dim</span>
                       <span class="fa fa-light fa-circle-xmark" style="color:red;background-color: white;"></span>
                     </div>
-                    -->
+
+                    <!--<span class="fa fa-2x fa-spin fa-spinner label top-right badge">Processing</span>-->
+                    <!--<span class="badge badge-pill badge-success p-2 w-50 main-tag" style="display:none;">Main</span>-->
+                    
                   </div>
                   <!-- Buttons -->
                   <div data-type="image-buttons" class="row justify-content-center mt-2">
-                    <div class="col text-center">
-                      <button data-type="add" class="btn btn-outline-primary btn-sm" type="button"><span class="fa fa-camera mr-2"></span>Add</button>
-                      <div data-type="btn-modify" style="display: none;">
-                        <!--
-                        <div class="row">
-                          <div class="col-9 offset-1 bg-warning text-center status_bad" style="font-size: small; color: red;display: none;">
-                            Blur/Dim <span class="fas fa-circle-question"></span>
-                          </div>
-                        </div>
-                        -->
-                        <div class="row">
-                          <div class="col">
-                            <span class="fa fa-spin fa-spinner status_processing ml-4" style="display:none;"></span>
-                            <button class="btn btn-outline-primary btn-sm status_good" type="button" style="display:none;">
-                              <span class="fa fa-light fa-circle-check mr-2" style="color:green"></span>Good
-                            </button>
-                            <button class="btn btn-outline-danger btn-sm status_bad" type="button" style="display:none;">
-                              <span class="fa fa-light fa-circle-xmark mr-2" style="color:red"></span>Bad
-                            </button>                            
-                            <!--
-                            <span class="fa fa-light fa-circle-check" style="color:green;background-color: white;"></span>                            
-                            -->
-                            <!--
-                            <button data-operation="rotateanticlockwise" class="btn btn-primary btn-sm rounded-pill" type="button"><span class="fas fa-rotate-left"></span></button>
-                            <button data-operation="rotateclockwise" class="btn btn-primary btn-sm rounded-pill" type="button"><span class="fas fa-rotate-right"></span></button>                            
-                            <button data-operation="remove" class="btn btn-danger btn-sm rounded-pill" type="button"><span class="fas fa-trash-can"></span></button>
-                            -->
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <button data-type="add" class="btn btn-outline-primary btn-sm" type="button"><span class="fa fa-camera mr-2"></span>Add</button>
+                    <button data-type="btn-modify" type="button" class="btn btn-outline-primary btn-sm m-0" data-toggle="popover" data-placement="right" style="display:none;">
+                      <span class="fa fa-pencil-alt mr-2"></span>Modify
+                    </button>
                   </div>
                 </div>
                 <!-- Popover operations -->
                 <div data-type="popover-model" style="display:none">
+                  <div data-type="popover" class="ml-3 mr-3" style="min-width:150px;">
+                    <!--
+                    <div class="row">
+                      <div class="col p-0">
+                        <button data-operation="main" class="btn btn-block btn-success btn-sm rounded-pill" type="button"><span class="fa fa-angle-double-up mr-2"></span>Main</button>
+                      </div>
+                    </div>                
+                    <div class="row mt-2">
+                      <div class="col-6 p-0 pr-1">
+                        <button data-operation="left" class="btn btn-block btn-outline-success btn-sm rounded-pill" type="button"><span class="fa fa-angle-left mr-2"></span>Left</button>
+                      </div>
+                      <div class="col-6 p-0 pl-1">
+                        <button data-operation="right" class="btn btn-block btn-outline-success btn-sm rounded-pill" type="button">Right<span class="fa fa-angle-right ml-2"></span></button>
+                      </div>
+                    </div>
+                    -->
+                    <div class="row mt-2">
+                      <div class="col-6 p-0 pr-1">
+                        <button data-operation="rotateanticlockwise" class="btn btn-block btn-outline-primary btn-sm rounded-pill" type="button"><span class="fas fa-undo-alt mr-2"></span>Rotate</button>
+                      </div>
+                      <div class="col-6 p-0 pl-1">
+                        <button data-operation="rotateclockwise" class="btn btn-block btn-outline-primary btn-sm rounded-pill" type="button">Rotate<span class="fas fa-redo-alt ml-2"></span></button>
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <button data-operation="remove" class="btn btn-outline-danger btn-sm btn-block" type="button"><span class="fa fa-times mr-2"></span>Remove</button>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="form-group row">
@@ -164,7 +163,12 @@
         <div class="card shadow-lg rounded-xlg mt-3">
           <div class="card-body">
               <div class="card-text">
-                <div class="row mt-1">
+                <div class="row">
+                  <div class="col">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type a message to your care team"></textarea>
+                  </div>
+                </div>
+                <div class="row mt-3">
                   <div class="col">
                     <select class="form-select form-select-sm w-100" aria-label=".form-select-sm example">
                       <option selected>Select your provider</option>
@@ -172,11 +176,6 @@
                       <option value="2">Dr. John Doe</option>                  
                     </select>   
                   </div>             
-                </div>                
-                <div class="row mt-3">
-                  <div class="col">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type a message to your care team"></textarea>
-                  </div>
                 </div>
               </div>              
           </div>          
@@ -193,13 +192,9 @@
         <!-- Upload Button -->
         <div class="row mt-2">
           <div class="col-md-4 offset-md-8 text-center mb-4">
-            <a href="uploaded.html" class="btn btn-block btn-sm btn-primary float-right"><span class="fa fa-envelope mr-2"></span>Send Message</a>
-            <!--
-            <button id="btnContinue" type="submit" form="frm" 
-              class="btn btn-block btn-primary float-right" data-toggle="tooltip" data-trigger="manual" data-placement="top" data-title="Continue">
+            <button id="btnContinue" type="submit" form="frm" class="btn btn-block btn-outline-primary float-right" data-toggle="tooltip" data-trigger="manual" data-placement="top" data-title="Continue">
               Send Message<span id="btnContinueIcon" class="fa fa-chevron-circle-right ml-2" style="display: none;"></span><span id="btnContinueLoading" class="fa fa-spin fa-spinner ml-2" style="display:none"></span>
             </button>
-            -->
           </div>
         </div>
 

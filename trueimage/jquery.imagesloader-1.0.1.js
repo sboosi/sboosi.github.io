@@ -420,8 +420,8 @@
          var $div = $(obj).closest('[data-type="image"]');
    
          // Hide Popover
-         var $buttonPopover = $div.find('[data-type="btn-modify"]');
-         $buttonPopover.popover('hide');
+         //var $buttonPopover = $div.find('[data-type="btn-modify"]');
+         //$buttonPopover.popover('hide');
    
          var id = $div.data('id');
    
@@ -909,6 +909,8 @@
          var $btnRight = $div.find('[data-type="right"]');
          var $ratioBox = $div.find('[data-type="image-ratio-box"]');
    
+         $btnRemove.show() ;
+
          $ratioBox.attr('data-toggle', 'tooltip');
          $ratioBox.attr('data-placement', 'top');
    
@@ -917,12 +919,12 @@
          else
            $ratioBox.attr('title', decodeURI(name));
    
-         $ratioBox.find(".status_processing").show() ;
+         $div.find(".status_processing").show() ; // ratioBox
          
          setTimeout(function() { 
-           $ratioBox.find(".status_processing").hide() ; 
+           $div.find(".status_processing").hide() ; // ratioBox
            var idx = self.AttachmentArray.map(function (file) { return file.FileName; }).indexOf(name);
-           if (idx == 3)           
+           if (idx == 1)           
              $div.find(".status_bad").show() ;  //ratioBox
            else
              $div.find(".status_good").show() ; 
@@ -1039,7 +1041,8 @@
    
        // Init tooltip
        ImagesLoader.prototype.initTooltip = function (obj) {
-   
+        
+          /*
          var self = this;
          var options = self.options;
          var $obj = $(obj);
@@ -1048,6 +1051,7 @@
            delay: { show: 200, hide: 0 },
            trigger: "hover"
          });
+         */
        }
    
        //#endregion
@@ -1071,9 +1075,9 @@
          this.$model = $element.find('[data-type="image-model"]');
    
          this.$model.bind('remove', (function (evt) { self.btnRemoveClick(evt, this); }));
-         this.$model.bind('main', (function (evt) { self.btnMainClick(evt, this); }));
-         this.$model.bind('left', (function (evt) { self.btnLeftClick(evt, this); }));
-         this.$model.bind('right', (function (evt) { self.btnRightClick(evt, this); }));
+         //this.$model.bind('main', (function (evt) { self.btnMainClick(evt, this); }));
+         //this.$model.bind('left', (function (evt) { self.btnLeftClick(evt, this); }));
+         //this.$model.bind('right', (function (evt) { self.btnRightClick(evt, this); }));
          this.$model.bind('rotateclockwise', (function (evt) {
    
            options.rotation = 90;
