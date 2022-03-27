@@ -362,6 +362,7 @@
           data.token = accessToken ;
           data.pid = patientFhir3Id ;
           data.myc_email = "choctest@v.com" ;
+          data.subject = "Test Message - Ignore" ;
 
           files.forEach(file => {
             var image = {name: file.FileName, type: file.MimeType, base64: file.Base64, size: file.FileSizeInBytes } ;
