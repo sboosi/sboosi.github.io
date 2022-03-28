@@ -365,7 +365,12 @@
           data.subject = "Test Message - Ignore" ;
 
           files.forEach(file => {
-            var image = {name: file.FileName, type: file.MimeType, base64: file.Base64, size: file.FileSizeInBytes } ;
+            var parts = file.FileName.split(".") ;
+            var fileExt = "" ;
+            if (parts.length > 1)
+              fileExt = parts[parts.length - 1] ;
+
+            var image = {name: file.FileName, type: fileExt, base64: file.Base64, size: file.FileSizeInBytes } ;
             data.images.push(image) ;
           }) ;
           
