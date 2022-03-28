@@ -361,7 +361,7 @@
           data.images = [] ;
           data.token = accessToken ;
           data.pid = patientFhir3Id ;
-          data.myc_email = "choctest@v.com" ;
+          data.myc_email = "choctest@v.com".toUpperCase() ;
           data.subject = "Test Message - Ignore" ;
 
           files.forEach(file => {
