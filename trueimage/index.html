@@ -378,9 +378,10 @@
           console.log(data) ;
           
           // "https://us-west1-som-rit-phi-seal.cloudfunctions.net/sb_test_2"
+          // "https://us-west1-som-rit-phi-seal.cloudfunctions.net/myc_send_message_dev",
           $.ajax({
             type: "POST",
-            url: "https://us-west1-som-rit-phi-seal.cloudfunctions.net/myc_send_message_dev",
+            url: "https://us-west1-som-rit-phi-trueimage.cloudfunctions.net/myc_send_message_dev",
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function (response) {
